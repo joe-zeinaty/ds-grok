@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - D.S_Grok</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/D.S_Grok.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        @if (Context.Session.GetInt32("UserID") != null)
+{
+    <header class="app-navbar-wrapper">
+        <nav class="app-navbar">
+            <a class="app-brand" href="/">
+                <span class="app-brand-icon">🤖</span>
+                <span>D.S GROK</span>
+            </a>
+
+            <div class="app-nav-links">
+                <a class="app-nav-link" href="/Account/Profile">
+    Profile
+</a>
+                <a class="app-nav-link" href="/">Dashboard</a>
+                <a class="app-nav-link" href="/Lessons">Lessons</a>
+                <a class="app-nav-link" href="/Challenges">Challenges</a>
+                <a class="app-nav-link" href="/Quizzes">Quizzes</a>
+                <a class="app-nav-link" href="/Leaderboard">Leaderboard</a>
+            </div>
+
+            @if (Context.Session.GetInt32("DailyStreak") != null)
+{
+    <span class="navbar-streak">
+        🔥 @Context.Session.GetInt32("DailyStreak")
+    </span>
+}
+            <a href="javascript:void(0)"
+   class="app-logout-btn logout-link"
+   onclick="showLogoutModal()">
+    Logout
+</a>
+        </nav>
+    </header>
+}
+        
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - D.S Grok - <a asp-area=""
+   asp-controller="Home"
+   asp-action="Privacy"
+   class="footer-link">
+    Privacy Policy
+</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <div id="logoutModal" class="logout-modal-overlay">
+    <div class="logout-modal-card">
+        <div class="logout-modal-icon">👋</div>
+
+        <h2>Come back soon!</h2>
+
+        <p>
+            Your progress is saved. Keep your streak alive next time.
+        </p>
+
+        <div class="logout-loading-bar">
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showLogoutModal() {
+        const modal = document.getElementById("logoutModal");
+        modal.classList.add("active");
+
+        setTimeout(function () {
+            window.location.href = "/Account/Logout";
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>

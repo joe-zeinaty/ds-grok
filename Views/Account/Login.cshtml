@@ -1,0 +1,513 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="auth-brand">
+            <div class="auth-logo">
+              <div class="auth-logo">
+    <svg width="42" height="42" viewBox="0 0 64 64">
+        <rect x="12" y="16" width="40" height="32" rx="8"
+              fill="white"/>
+
+        <circle cx="24" cy="32" r="4" fill="#4F46E5"/>
+        <circle cx="40" cy="32" r="4" fill="#4F46E5"/>
+
+        <rect x="26" y="42" width="12" height="3"
+              rx="1.5"
+              fill="#4F46E5"/>
+
+        <line x1="32" y1="8"PROJECT OVERVIEW
+
+Project Title: D.S-Grok: A Game-Based Learning Web Application for Data Structures Education
+
+Project Type: Undergraduate Computer Science Senior Project / Dissertation
+
+University: American University of Cyprus (AUCY)
+
+Application Type: Web-based educational platform
+
+Purpose:
+To investigate whether Game-Based Learning (GBL) principles can be used to improve the learning experience of Data Structures by combining:
+
+Interactive visualizations
+Practical challenges
+Quizzes
+Progress tracking
+Gamification elements
+
+within a single web application.
+
+IMPORTANT POSITIONING
+
+The application should be described as:
+
+"A Game-Based Learning application supported by gamification elements."
+
+Do NOT describe it as purely gamified.
+
+Explanation:
+
+Game-Based Learning Components
+Interactive pointer visualizer
+Interactive linked list visualizer
+Lesson activities
+Linked list traversal challenge
+Linked list operations challenge
+Interactive quizzes
+Gamification Components
+XP
+Achievements
+Levels
+Progression
+Leaderboard
+Rewards
+
+Recommended dissertation/presentation statement:
+
+D.S-Grok combines game-based learning activities with gamification mechanics to support both educational outcomes and learner motivation.
+
+RESEARCH AIM
+
+The aim of this project was:
+
+To investigate the application of Game-Based Learning within Data Structures education and develop a web-based educational platform that supports learning through visualization, interaction, assessment, and progression mechanisms.
+
+RESEARCH QUESTIONS
+What challenges do students face when learning Data Structures?
+Can visualization and interactive learning activities improve understanding of abstract concepts?
+How can Game-Based Learning principles be integrated into a web-based educational platform?
+QUESTIONNAIRE STUDY
+
+Participants:
+
+21 Computer Science students
+
+Distribution:
+
+Year 1: 4.8%
+Year 2: 47.6%
+Year 3: 28.6%
+Year 4: 19.1%
+
+Sampling:
+
+Convenience Sampling
+
+Data Collection:
+
+Google Forms
+
+Analysis:
+
+Descriptive Statistics
+IMPORTANT FINDING
+
+Students identified:
+
+Most Difficult Topics
+
+Graphs received the highest score.
+
+HOWEVER:
+
+Graphs are not formally covered in the Data Structures module taught to the target population.
+
+Therefore:
+
+Pointers and Memory Management
+
+followed by
+
+Linked Lists
+
+were selected because they:
+
+Ranked highly
+Are part of the curriculum
+Were repeatedly mentioned by students
+LITERATURE REVIEW
+Educational Theories
+Behaviorism (Skinner)
+
+Implemented through:
+
+XP
+Achievements
+Rewards
+Immediate feedback
+Cognitivism
+
+Implemented through:
+
+Visualizations
+Mental model support
+Structured learning
+Constructivism (Piaget/Vygotsky)
+
+Implemented through:
+
+Interactive activities
+Exploration
+Problem-solving
+Game-Based Learning
+
+Discussed:
+
+Benefits of GBL
+Computer Science education
+Data Structures education
+
+Important Study:
+
+Dicheva & Hodge (2018)
+
+Active Learning through Game Play in a Data Structures Course
+
+Used in literature review because it directly relates to Data Structures education.
+
+TECHNOLOGY STACK
+
+Frontend:
+
+HTML
+CSS
+JavaScript
+
+Backend:
+
+ASP.NET Core MVC (.NET 8)
+C#
+
+Database:
+
+MySQL
+
+ORM:
+
+Entity Framework Core
+
+Architecture:
+
+MVC Pattern
+Three-Tier Architecture
+
+Deployment:
+
+Azure App Service (planned)
+DATABASE
+
+Total Tables: 14
+
+Users
+Levels
+Lessons
+LessonProgress
+Quizzes
+Questions
+QuestionOptions
+QuizAttempts
+QuizAttemptAnswers
+Challenges
+ChallengeAttempts
+Achievements
+UserAchievements
+XPTransactions
+DIAGRAMS USED
+
+Appendix E:
+
+Use Case Diagram
+Three-Tier Architecture Diagram
+Sequence Diagram
+
+Lesson Completion → XP Award → Achievement Unlock
+
+Appendix G:
+
+ERD
+Relational Schema
+
+Appendix H:
+
+UML Class Diagram
+IMPLEMENTED FEATURES
+Authentication
+Login
+Registration
+Logout
+Session Management
+Dashboard
+
+Displays:
+
+XP
+Level
+Achievements
+Streak
+Progress
+Learning Path
+
+Features:
+
+Levels
+Locked content
+Progress tracking
+Lesson Arena
+
+Implemented:
+
+Pointer Fundamentals
+
+Activities:
+
+Assign PTR
+Dereference PTR
+Reassign PTR
+
+Includes:
+
+Interactive visualizer
+C++ code panel
+Mentor guidance
+Quiz System
+
+Features:
+
+Visual questions
+Progress tracking
+Scoring
+XP rewards
+Challenges
+Linked List Traversal Challenge
+
+Students:
+
+Build traversal sequence
+Reach NULL node
+Linked List Operations Challenge
+
+Students:
+
+Insert node
+Delete node
+Search node
+Gamification
+
+Implemented:
+
+XP
+Achievements
+Levels
+Progression
+Leaderboard
+HCI PRINCIPLES USED
+Usability
+
+Simple navigation
+
+Cognitive Load Reduction
+
+Concepts broken into smaller units
+
+Feedback
+
+Immediate responses
+
+Success messages
+
+Completion messages
+
+Consistency
+
+Same UI style throughout application
+
+Visual Clarity
+
+Interactive diagrams
+
+Clear relationships
+
+Learnability
+
+Progressive difficulty
+
+Level-based structure
+
+SCREENSHOTS AVAILABLE
+
+Appendix F contains:
+
+Login Page
+Registration Page
+Dashboard
+Learning Path
+Lesson Arena
+Quiz Interface
+Challenge Interface
+Leaderboard
+Profile Page
+Exit Confirmation Dialog
+Success Message
+Privacy & IP Notice
+
+Each screenshot has associated HCI and educational theory annotations.
+
+IMPORTANT LIMITATION
+
+Formal evaluation was NOT completed.
+
+Reason:
+
+Development took longer than expected.
+Semester concluded.
+Target students were no longer available.
+
+DO NOT claim user testing occurred.
+
+CHAPTER 5 POSITION
+
+Evaluation chapter was rewritten as:
+
+5.1 Introduction
+5.2 Evaluation Strategy
+
+Planned:
+
+User Testing
+Heuristic Evaluation
+Cognitive Walkthrough
+5.3 Implementation Outcomes
+
+Evaluated against objectives.
+
+5.4 Project Limitations
+
+Includes lack of formal testing.
+
+5.5 Discussion
+
+Links implementation to:
+
+Questionnaire findings
+Educational theories
+GBL literature
+5.6 Chapter Summary
+CHAPTER 6 POSITION
+Summary of Research
+Achievement of Objectives
+Contributions
+Future Work
+Final Remarks
+POWERPOINT RECOMMENDED STRUCTURE
+Title Slide
+Project Overview
+Problem Statement
+Research Aim & Objectives
+Literature Review
+Behaviorism
+Cognitivism
+Constructivism
+GBL
+Research Methodology
+Questionnaire Findings
+System Requirements
+System Architecture
+Database Design (ERD)
+Application Features
+Lesson Arena Demo
+Quiz & Challenge Demo
+Gamification Features
+HCI & Educational Principles
+Implementation Outcomes
+Limitations
+Future Work
+Conclusion
+Questions
+PRESENTATION STRATEGY
+
+Focus on:
+
+Educational problem
+Student feedback
+Visualization
+Interactive learning
+Game-Based Learning
+Technical implementation
+
+Spend less time on:
+
+Database tables
+UML details
+Individual code implementations
+
+The presentation should tell the story:
+
+Student difficulties → Research → Requirements → Design → Development → Educational Solution → Future Potential.
+              x2="32" y2="16"
+              stroke="white"
+              stroke-width="3"/>
+
+        <circle cx="32" cy="7"
+                r="3"
+                fill="#06B6D4"/>
+    </svg>
+</div>
+            </div>
+            <h1>D.S GROK</h1>
+            <p>Data Structures Made Fun!</p>
+        </div>
+
+        <div class="auth-heading">
+    <h2>Welcome back</h2>
+    <p class="auth-subtitle">Log in to continue your learning journey.</p>
+</div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="auth-error">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form method="post">
+
+            <div class="auth-field">
+                <label>Email</label>
+                <input type="email"
+                       name="email"
+                       placeholder="Enter your email"
+                       required />
+            </div>
+
+            <div class="auth-field">
+                <label>Password</label>
+                <input type="password"
+                       name="password"
+                       placeholder="Enter your password"
+                       required />
+            </div>
+
+            <div class="auth-options">
+                <label class="remember-me">
+                    <input type="checkbox" name="rememberMe" />
+                    Remember me
+                </label>
+            </div>
+
+            <button type="submit" class="auth-btn">
+                Login
+            </button>
+        </form>
+
+        <p class="auth-switch">
+            No account yet?
+            <a href="/Account/Register">Create one</a>
+        </p>
+
+    </div>
+
+</div>

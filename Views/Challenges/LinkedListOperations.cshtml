@@ -1,0 +1,207 @@
+@{
+    ViewData["Title"] = "Linked List Operations";
+}
+
+<div class="challenge-module-arena">
+
+    <div id="operationsMentorBanner" class="challenge-npc-banner">
+        <div class="npc-avatar">🧙</div>
+
+        <div class="npc-dialog-content">
+            <span class="npc-name">Challenge Mentor</span>
+
+            <div id="operationsFeedback">
+                The linked list currently contains <strong>10 → 20 → 30</strong>.
+                Choose an operation to observe how pointers change.
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-top-bar">
+
+        <button type="button"
+                class="arena-exit-btn"
+                onclick="openQuitModal()">
+            ← Exit
+        </button>
+
+        <div class="lesson-status">
+            Linked List Operations Challenge
+        </div>
+
+        <form method="post"
+              action="/Challenges/CompleteChallenge"
+              class="arena-complete-form">
+
+            <input type="hidden" name="challengeId" value="2" />
+
+            <button id="completeOperationsBtn"
+                    type="submit"
+                    class="arena-complete-btn"
+                    disabled>
+                Complete
+            </button>
+
+        </form>
+
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success mb-2">
+            @TempData["Success"]
+        </div>
+    }
+
+    <div class="arena-visualizer-card">
+
+        <div class="pointer-stage linkedlist-stage">
+            <svg id="operationsSvg"
+                 viewBox="0 0 1050 360"
+                 preserveAspectRatio="xMidYMid meet">
+
+                <defs>
+                    <linearGradient id="opsNodeGradient" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#ffffff" />
+                        <stop offset="100%" stop-color="#eef4ff" />
+                    </linearGradient>
+
+                    <filter id="opsSoftShadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="8" stdDeviation="8"
+                                      flood-color="#202E53"
+                                      flood-opacity="0.16" />
+                    </filter>
+
+                    <marker id="arrowhead"
+                            markerWidth="12"
+                            markerHeight="12"
+                            refX="10"
+                            refY="6"
+                            orient="auto">
+                        <polygon points="0 0, 12 6, 0 12"
+                                 fill="#06b6d4" />
+                    </marker>
+                </defs>
+
+            </svg>
+        </div>
+
+        <div class="lesson-command-bar">
+
+            <button id="insertBtn"
+                    class="lesson-action-btn">
+                Insert 25
+            </button>
+
+            <button id="deleteBtn"
+                    class="lesson-action-btn">
+                Delete 25
+            </button>
+
+            <button id="searchBtn"
+                    class="lesson-action-btn">
+                Search 30
+            </button>
+
+            <button id="resetOpsBtn"
+                    class="lesson-action-btn secondary">
+                Reset
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="lesson-console expandable-code-console" id="operationsCodeConsole">
+    <div class="console-header code-console-toggle"
+         onclick="toggleOperationsCodeConsole()">
+        <span>C++ Operation Code</span>
+        <span id="codeConsoleToggleText">Expand ⬆</span>
+    </div>
+
+    <pre class="cpp-code-box"><code id="cppCodeBlock">// Select an operation to begin.</code></pre>
+</div>
+
+<div class="operations-history-hidden">
+    <ul id="operationHistory" class="mb-0 operation-history-list">
+        <li>Initial list created: 10 → 20 → 30</li>
+    </ul>
+</div>
+
+</div>
+
+<div id="quitModal" class="quit-modal-overlay">
+    <div class="quit-modal-card">
+        <h3>Quit this module?</h3>
+
+        <p>
+            Are you sure you want to quit? Your current progress in this module may not be saved.
+        </p>
+
+        <div class="quit-modal-actions">
+            <button type="button"
+                    class="btn btn-secondary"
+                    onclick="closeQuitModal()">
+                No, Continue
+            </button>
+
+            <a id="quitConfirmLink"
+               class="btn btn-danger"
+               href="#">
+                Yes, Quit
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const quitDestination = "/Challenges";
+
+    function openQuitModal() {
+        document.getElementById("quitConfirmLink").href = quitDestination;
+        document.getElementById("quitModal").classList.add("active");
+    }
+
+    function closeQuitModal() {
+        document.getElementById("quitModal").classList.remove("active");
+    }
+</script>
+
+<style>
+    body:has(.challenge-module-arena) {
+        overflow: hidden;
+    }
+
+    body:has(.challenge-module-arena) header,
+    body:has(.challenge-module-arena) nav,
+    body:has(.challenge-module-arena) footer {
+        display: none !important;
+    }
+
+    body:has(.challenge-module-arena) main {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: none !important;
+    }
+</style>
+<script>
+    function toggleOperationsCodeConsole() {
+        const arena = document.querySelector(".challenge-module-arena");
+        const consoleBox = document.getElementById("operationsCodeConsole");
+        const toggleText = document.getElementById("codeConsoleToggleText");
+
+        arena.classList.toggle("code-expanded");
+        consoleBox.classList.toggle("expanded");
+
+        toggleText.textContent = consoleBox.classList.contains("expanded")
+            ? "Minimize ⬇"
+            : "Expand ⬆";
+
+        if (window.refreshOperationsCodeConsole) {
+    window.refreshOperationsCodeConsole();
+}
+    }
+</script>
+@section Scripts {
+    <script src="~/js/linkedlist-operations.js" asp-append-version="true"></script>
+}

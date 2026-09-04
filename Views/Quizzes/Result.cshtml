@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Quiz Result";
+
+    int score = TempData["QuizScore"] == null
+        ? 0
+        : Convert.ToInt32(TempData["QuizScore"]);
+
+    bool passed = TempData["QuizPassed"]?.ToString() == "true";
+}
+
+<div class="dashboard-card text-center mt-4">
+    <h1>Quiz Result</h1>
+
+    <h2>@score%</h2>
+
+    @if (passed)
+    {
+        <div class="alert alert-success mt-3">
+            Congratulations! You passed the quiz and earned XP.
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger mt-3">
+            You did not pass this time. Review the lesson and try again.
+        </div>
+    }
+
+    <a href="/Quizzes" class="btn btn-primary mt-3">
+        Back to Quizzes
+    </a>
+
+    <a href="/" class="btn btn-secondary mt-3">
+        Dashboard
+    </a>
+</div>

@@ -1,0 +1,233 @@
+@model List<D_S_Grok.Models.Question>
+
+@{
+    ViewData["Title"] = "Take Quiz";
+    var quiz = ViewBag.Quiz as D_S_Grok.Models.Quiz;
+    var options = ViewBag.Options as List<D_S_Grok.Models.QuestionOption>;
+    var questionNumber = 1;
+}
+
+<div class="container mt-4">
+<button type="button"
+        class="module-exit-btn"
+        onclick="openQuitModal()">
+    ← Exit Module
+</button>
+    <div class="challenge-hero mb-4">
+
+        <div>
+            <span class="challenge-eyebrow">
+                Knowledge Check
+            </span>
+
+            <h1>@quiz?.Title</h1>
+
+            <p>
+                Use the memory diagram below to answer each question.
+                Choose carefully and submit when you are ready.
+            </p>
+        </div>
+
+        <div class="challenge-xp-badge">
+            +@quiz?.XPReward XP
+        </div>
+
+    </div>
+
+    <div class="quiz-progress-card mb-4">
+        <div>
+            <h5>Quiz Progress</h5>
+            <p>@Model.Count questions • Pass mark: @quiz?.PassMark%</p>
+        </div>
+
+        <span class="status-pill unlocked">
+            In Progress
+        </span>
+    </div>
+
+    <div class="dashboard-card pointer-lab-card modern-lesson-card mb-4">
+
+        <div class="pointer-lab-header">
+            <div>
+                <h4>Visual Scenario</h4>
+                <p>
+                    The pointer <strong>PTR</strong> stores the address of variable
+                    <strong>X</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div class="pointer-stage">
+            <svg width="100%"
+                 height="300"
+                 viewBox="0 0 900 300">
+
+                <defs>
+                    <linearGradient id="quizNodeGradient" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#ffffff" />
+                        <stop offset="100%" stop-color="#eef4ff" />
+                    </linearGradient>
+
+                    <filter id="quizSoftShadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="8" stdDeviation="8"
+                                      flood-color="#202E53"
+                                      flood-opacity="0.16" />
+                    </filter>
+
+                    <marker id="quizArrowhead"
+                            markerWidth="12"
+                            markerHeight="12"
+                            refX="10"
+                            refY="6"
+                            orient="auto">
+                        <polygon points="0 0, 12 6, 0 12"
+                                 fill="#06B6D4" />
+                    </marker>
+                </defs>
+
+                <rect x="90" y="70" width="250" height="140" rx="22"
+                      fill="url(#quizNodeGradient)"
+                      stroke="#4F46E5"
+                      stroke-width="3"
+                      filter="url(#quizSoftShadow)" />
+
+                <text x="130" y="115" class="memory-title">Variable X</text>
+                <text x="130" y="155" class="memory-main">value = 10</text>
+                <text x="130" y="190" class="memory-address">address: 1001</text>
+
+                <rect x="570" y="70" width="250" height="140" rx="22"
+                      fill="url(#quizNodeGradient)"
+                      stroke="#202E53"
+                      stroke-width="3"
+                      filter="url(#quizSoftShadow)" />
+
+                <text x="610" y="115" class="memory-title">Pointer PTR</text>
+                <text x="610" y="155" class="memory-main">stores: 1001</text>
+                <text x="610" y="190" class="memory-address">address: 2001</text>
+
+                <line x1="570"
+                      y1="140"
+                      x2="340"
+                      y2="140"
+                      stroke="#06B6D4"
+                      stroke-width="6"
+                      stroke-linecap="round"
+                      marker-end="url(#quizArrowhead)" />
+
+                <text x="410"
+                      y="115"
+                      class="arrow-label">
+                    PTR points to X
+                </text>
+
+            </svg>
+        </div>
+
+    </div>
+
+    <form method="post" action="/Quizzes/Submit">
+
+        <input type="hidden"
+               name="quizId"
+               value="@quiz?.QuizID" />
+
+        @foreach (var question in Model)
+        {
+            <div class="quiz-question-card mb-4">
+
+                <div class="quiz-question-header">
+                    <span class="question-number">
+                        Question @questionNumber
+                    </span>
+
+                    <span class="question-count">
+                        @questionNumber / @Model.Count
+                    </span>
+                </div>
+
+                <h4>@question.QuestionText</h4>
+
+                @{
+                    var questionOptions = options?
+                        .Where(o => o.QuestionID == question.QuestionID)
+                        .ToList();
+                }
+
+                <div class="quiz-options">
+                    @foreach (var option in questionOptions!)
+                    {
+                        <label class="quiz-option-card">
+
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="answers[@question.QuestionID]"
+                                   value="@option.OptionID"
+                                   required />
+
+                            <span>@option.OptionText</span>
+
+                        </label>
+                    }
+                </div>
+
+            </div>
+
+            questionNumber++;
+        }
+
+        <div class="challenge-completion-card mt-4">
+
+            <h4>Submit Your Answers</h4>
+
+            <p>
+                Review your choices before submitting. Your score will be calculated
+                based on the selected answers.
+            </p>
+
+            <button class="btn btn-success btn-lg"
+                    type="submit">
+                Submit Quiz
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<div id="quitModal" class="quit-modal-overlay">
+    <div class="quit-modal-card">
+        <h3>Quit this module?</h3>
+
+        <p>
+            Are you sure you want to quit? Your current progress in this module may not be saved.
+        </p>
+
+        <div class="quit-modal-actions">
+            <button type="button"
+                    class="btn btn-secondary"
+                    onclick="closeQuitModal()">
+                No, Continue
+            </button>
+
+            <a id="quitConfirmLink"
+               class="btn btn-danger"
+               href="#">
+                Yes, Quit
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    const quitDestination = "/Quizzes";
+</script>
+<script>
+    function openQuitModal() {
+        document.getElementById("quitConfirmLink").href = quitDestination;
+        document.getElementById("quitModal").classList.add("active");
+    }
+
+    function closeQuitModal() {
+        document.getElementById("quitModal").classList.remove("active");
+    }
+</script>

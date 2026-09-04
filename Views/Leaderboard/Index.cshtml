@@ -1,0 +1,102 @@
+@model List<D_S_Grok.Models.User>
+
+@{
+    ViewData["Title"] = "Leaderboard";
+    int rank = 1;
+    int currentUserId = ViewBag.CurrentUserID;
+}
+
+<div class="challenge-hero mb-4">
+
+    <div>
+        <span class="challenge-eyebrow">
+            Competition
+        </span>
+
+        <h1>Leaderboard</h1>
+
+        <p>
+            Earn XP, complete lessons, conquer challenges,
+            and climb the rankings against your peers.
+        </p>
+    </div>
+
+    <div class="challenge-xp-badge">
+        🏆
+    </div>
+
+</div>
+
+@if (Model.Count >= 3)
+{
+    <div class="leaderboard-podium mb-4">
+
+        <div class="podium-card second-place">
+            <div class="podium-medal">🥈</div>
+            <h5>@Model[1].Username</h5>
+            <span>@Model[1].TotalXP XP</span>
+        </div>
+
+        <div class="podium-card first-place">
+            <div class="podium-medal">🥇</div>
+            <h4>@Model[0].Username</h4>
+            <span>@Model[0].TotalXP XP</span>
+        </div>
+
+        <div class="podium-card third-place">
+            <div class="podium-medal">🥉</div>
+            <h5>@Model[2].Username</h5>
+            <span>@Model[2].TotalXP XP</span>
+        </div>
+
+    </div>
+}
+
+<div class="leaderboard-table-card">
+    <table class="table table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Student</th>
+                <th>Level</th>
+                <th>Total XP</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var user in Model)
+        {
+            var isCurrentUser = user.UserID == currentUserId;
+
+            <tr class="@(isCurrentUser ? "leaderboard-current-user-row" : "")">
+                <td class="rank-cell">
+
+    @if (rank == 1)
+    {
+        <span class="rank-medal">🥇</span>
+    }
+    else if (rank == 2)
+    {
+        <span class="rank-medal">🥈</span>
+    }
+    else if (rank == 3)
+    {
+        <span class="rank-medal">🥉</span>
+    }
+    else
+    {
+        <span class="rank-number">#@rank</span>
+    }
+
+</td>
+
+                <td>@user.Username</td>
+                <td>@user.CurrentLevel</td>
+                <td><strong>@user.TotalXP</strong></td>
+            </tr>
+
+            rank++;
+        }
+        </tbody>
+    </table>
+</div>

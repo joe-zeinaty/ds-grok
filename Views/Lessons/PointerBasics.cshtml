@@ -1,0 +1,302 @@
+@{
+    ViewData["Title"] = "Pointer Fundamentals";
+}
+
+<div class="lesson-arena">
+
+    <div id="npcDialogBanner">
+        <div class="npc-avatar">
+            🧙
+        </div>
+
+        <div class="npc-dialog-content">
+            <span class="npc-name">Pointer Mentor</span>
+
+            <div id="stepContent">
+                Step 1: Create integer variable X with value 10.
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-top-bar">
+
+        <button type="button"
+                class="arena-exit-btn"
+                onclick="openQuitModal()">
+            ← Exit
+        </button>
+
+        <div class="lesson-status">
+            Pointer Fundamentals
+        </div>
+
+        <form method="post"
+              action="/Progress/CompleteLesson"
+              class="arena-complete-form">
+
+            <input type="hidden"
+                   name="lessonId"
+                   value="1" />
+
+            <button id="completeLessonBtn"
+                    type="submit"
+                    class="arena-complete-btn"
+                    disabled>
+                Complete
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="arena-visualizer-card">
+
+        <div class="arena-visualizer-header">
+            <div>
+                <h4>Pointer Memory Visualizer</h4>
+                <p>Watch how a pointer stores the address of another variable.</p>
+            </div>
+        </div>
+
+        <div class="pointer-stage">
+            <svg id="pointerSvg"
+     viewBox="0 0 1000 360"
+     preserveAspectRatio="xMidYMid meet">
+
+                <defs>
+                    <linearGradient id="nodeGradient" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#ffffff" />
+                        <stop offset="100%" stop-color="#eef4ff" />
+                    </linearGradient>
+
+                    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="8" stdDeviation="8"
+                                      flood-color="#202E53"
+                                      flood-opacity="0.18" />
+                    </filter>
+
+                    <marker id="arrowhead"
+                            markerWidth="12"
+                            markerHeight="12"
+                            refX="10"
+                            refY="6"
+                            orient="auto">
+                        <polygon points="0 0, 12 6, 0 12"
+                                 fill="#06b6d4" />
+                    </marker>
+                </defs>
+
+                <g id="xCard" class="memory-card">
+                    <rect x="90" y="95" width="280" height="150" rx="22"
+                          fill="url(#nodeGradient)"
+                          stroke="#4f46e5"
+                          stroke-width="3"
+                          filter="url(#softShadow)" />
+
+                    <text x="130" y="140" class="memory-title">Variable x</text>
+                    <text x="130" y="178" class="memory-main">value = 10</text>
+                    <text x="130" y="215" class="memory-address">address: 1001</text>
+
+                </g>
+
+                <g id="ptrCard" class="memory-card">
+                    <rect x="630" y="95" width="280" height="150" rx="22"
+                          fill="url(#nodeGradient)"
+                          stroke="#202E53"
+                          stroke-width="3"
+                          filter="url(#softShadow)" />
+
+                    <text x="670" y="140" class="memory-title">Pointer ptr</text>
+
+                    <text x="670" y="178" class="memory-main">
+                        stores:
+                        <tspan id="pointerValueSVG">NULL</tspan>
+                    </text>
+
+                    <text x="670" y="215" class="memory-address">address: 2001</text>
+                </g>
+
+                <g id="yCard" class="memory-card" opacity="0">
+                    <rect x="360" y="235" width="280" height="105" rx="22"
+                          fill="url(#nodeGradient)"
+                          stroke="#06b6d4"
+                          stroke-width="3"
+                          filter="url(#softShadow)" />
+
+                    <text x="400" y="275" class="memory-title">Variable y</text>
+                    <text x="400" y="307" class="memory-main">value = 25</text>
+                    <text x="400" y="332" class="memory-address">address: 3001</text>
+                </g>
+
+                <path id="pointerArrow"
+      d="M 630 135 C 520 45, 470 45, 370 135"
+      fill="none"
+      stroke="#06b6d4"
+      stroke-width="6"
+      stroke-linecap="round"
+      marker-end="url(#arrowhead)"
+      opacity="0" />
+
+<path id="pointerArrowY"
+      d="M 770 245 C 770 330, 640 350, 500 330"
+      fill="none"
+      stroke="#06b6d4"
+      stroke-width="6"
+      stroke-linecap="round"
+      marker-end="url(#arrowhead)"
+      opacity="0" />
+
+                <text id="arrowLabel"
+                      x="455"
+                      y="145"
+                      class="arrow-label"
+                      opacity="0">
+                    ptr points to x
+                </text>
+
+                <text id="arrowLabelY"
+                      x="655"
+                      y="260"
+                      class="arrow-label"
+                      opacity="0">
+                    ptr now points to y
+                </text>
+
+                <g id="dereferencePanel" opacity="0">
+    <rect x="300" y="20" width="400" height="60" rx="20"
+          fill="#ecfdf5"
+          stroke="#22c55e"
+          stroke-width="3"
+          filter="url(#softShadow)" />
+
+    <text x="335" y="57"
+          class="dereference-result">
+        Dereferenced value:
+        <tspan id="dereferenceValueSVG">10</tspan>
+    </text>
+</g>
+            </svg>
+        </div>
+
+        <div class="lesson-command-bar">
+
+            <button id="assignBtn"
+                    class="lesson-action-btn">
+                Assign PTR = &X
+            </button>
+
+            <button id="dereferenceBtn"
+                    class="lesson-action-btn"
+                    disabled>
+                Dereference *PTR
+            </button>
+
+            <button id="reassignBtn"
+                    class="lesson-action-btn"
+                    disabled>
+                Reassign PTR = &Y
+            </button>
+
+            <button id="resetBtn"
+                    class="lesson-action-btn secondary">
+                Reset
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="lesson-console expandable-code-console" id="pointerCodeConsole">
+    <div class="console-header code-console-toggle"
+         onclick="togglePointerCodeConsole()">
+        <span>C++ Code Execution</span>
+        <span id="pointerCodeToggleText">Expand ⬆</span>
+    </div>
+
+    <pre class="cpp-code-box"><code id="pointerCodeBlock">
+int x = 10;
+
+int* ptr = nullptr;
+</code></pre>
+</div>
+
+</div>
+
+<div id="quitModal" class="quit-modal-overlay">
+    <div class="quit-modal-card">
+        <h3>Quit this module?</h3>
+
+        <p>
+            Are you sure you want to quit? Your current progress in this module may not be saved.
+        </p>
+
+        <div class="quit-modal-actions">
+            <button type="button"
+                    class="btn btn-secondary"
+                    onclick="closeQuitModal()">
+                No, Continue
+            </button>
+
+            <a id="quitConfirmLink"
+               class="btn btn-danger"
+               href="#">
+                Yes, Quit
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const quitDestination = "/Lessons";
+
+    function openQuitModal() {
+        document.getElementById("quitConfirmLink").href = quitDestination;
+        document.getElementById("quitModal").classList.add("active");
+    }
+
+    function closeQuitModal() {
+        document.getElementById("quitModal").classList.remove("active");
+    }
+</script>
+
+
+<style>
+    body:has(.lesson-arena) {
+        overflow: hidden;
+    }
+
+    body:has(.lesson-arena) header,
+    body:has(.lesson-arena) nav,
+    body:has(.lesson-arena) footer {
+        display: none !important;
+    }
+
+    body:has(.lesson-arena) main {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: none !important;
+    }
+</style>
+
+<script>
+    function togglePointerCodeConsole() {
+        const arena = document.querySelector(".lesson-arena");
+        const consoleBox = document.getElementById("pointerCodeConsole");
+        const toggleText = document.getElementById("pointerCodeToggleText");
+
+        arena.classList.toggle("code-expanded");
+        consoleBox.classList.toggle("expanded");
+
+        toggleText.textContent = consoleBox.classList.contains("expanded")
+            ? "Minimize ⬇"
+            : "Expand ⬆";
+
+        if (window.refreshPointerCodeConsole) {
+            window.refreshPointerCodeConsole();
+        }
+    }
+</script>
+
+@section Scripts {
+    <script src="~/js/pointer-visualizer.js" asp-append-version="true"></script>
+}

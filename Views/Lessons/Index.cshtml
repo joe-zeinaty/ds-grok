@@ -1,0 +1,156 @@
+@model List<D_S_Grok.Models.Level>
+
+@{
+    ViewData["Title"] = "Lessons";
+    var completedLessonIds = ViewBag.CompletedLessonIds as List<int>;
+    var allLessons = ViewBag.Lessons as List<D_S_Grok.Models.Lesson>;
+}
+
+<div class="learning-path-page">
+
+    <div class="learning-path-hero">
+        <div>
+            <h1>Learning Path</h1>
+            <p>Progress through pointers, linked lists, and operations step by step.</p>
+        </div>
+
+        <div class="path-badge">
+            🧠 Data Structures
+        </div>
+    </div>
+
+    <div class="learning-path">
+
+        @foreach (var level in Model)
+{
+    var levelLessons = allLessons
+        .Where(l => l.LevelID == level.LevelID)
+        .OrderBy(l => l.LessonOrder)
+        .ToList();
+
+    var completedCount = levelLessons.Count(l => completedLessonIds.Contains(l.LessonID));
+    var totalCount = levelLessons.Count;
+
+    var isUnlocked = level.LevelNumber == 1 || completedCount > 0 || Model
+        .Where(x => x.LevelNumber < level.LevelNumber)
+        .All(previous =>
+            allLessons
+                .Where(l => l.LevelID == previous.LevelID)
+                .All(l => completedLessonIds.Contains(l.LessonID))
+        );
+
+    <section class="path-level @(isUnlocked ? "unlocked" : "locked")">
+
+        <div class="path-level-header">
+            <div>
+                <span class="level-chip">Level @level.LevelNumber</span>
+                <h2>@level.Title</h2>
+                <p>@level.Description</p>
+            </div>
+
+            <div class="level-progress-pill">
+                @completedCount / @totalCount Complete
+            </div>
+        </div>
+
+        <div class="lesson-track">
+
+            @foreach (var lesson in levelLessons)
+            {
+                bool completed = completedLessonIds.Contains(lesson.LessonID);
+
+                bool lessonUnlocked = isUnlocked &&
+                    (
+                        lesson.LessonOrder == 1 ||
+                        levelLessons
+                            .Where(l => l.LessonOrder < lesson.LessonOrder)
+                            .All(l => completedLessonIds.Contains(l.LessonID))
+                    );
+
+                <div class="lesson-node-card @(completed ? "completed" : lessonUnlocked ? "available" : "locked")">
+
+                    <div class="lesson-node-icon">
+                        @if (completed)
+                        {
+                            <span>✓</span>
+                        }
+                        else if (lessonUnlocked)
+                        {
+                            <span>▶</span>
+                        }
+                        else
+                        {
+                            <span>🔒</span>
+                        }
+                    </div>
+
+                    <div class="lesson-node-content">
+                        <h3>@lesson.Title</h3>
+                        <p>@lesson.Content</p>
+
+                        <div class="lesson-meta">
+                            <span>+@lesson.XPReward XP</span>
+                            <span>Lesson @lesson.LessonOrder</span>
+                        </div>
+
+                        @if (lessonUnlocked)
+                        {
+                            if (lesson.LessonID == 1)
+                            {
+                                <a href="/Lessons/PointerBasics" class="btn btn-primary">
+                                    @(completed ? "Review Lesson" : "Start Lesson")
+                                </a>
+                            }
+                            else
+                            {
+                                <button class="btn btn-secondary" disabled>
+                                    Coming Soon
+                                </button>
+                            }
+                        }
+                        else
+                        {
+                            <button class="btn btn-outline-secondary" disabled>
+                                Locked
+                            </button>
+                        }
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </section>
+}
+
+    </div>
+
+@if (TempData["Success"] != null)
+{
+    <div id="celebrationModal" class="celebration-overlay active">
+        <div class="celebration-card">
+            <div class="celebration-icon">🎉</div>
+
+            <h2>Great Job!</h2>
+
+            <p>
+                @TempData["Success"]
+            </p>
+
+            <button type="button"
+                    class="btn btn-primary"
+                    onclick="closeCelebrationModal()">
+                Continue Learning
+            </button>
+        </div>
+    </div>
+}
+
+<script>
+    function closeCelebrationModal() {
+        document.getElementById("celebrationModal").classList.remove("active");
+    }
+</script>
+
+</div>

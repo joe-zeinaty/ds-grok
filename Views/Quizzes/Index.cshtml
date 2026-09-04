@@ -1,0 +1,219 @@
+@model List<D_S_Grok.Models.Quiz>
+
+@{
+    ViewData["Title"] = "Quizzes";
+}
+
+<div class="quizzes-page">
+
+    <div class="challenge-hero mb-4">
+
+        <div>
+            <span class="challenge-eyebrow">
+                Knowledge Checks
+            </span>
+
+            <h1>Quiz Arena</h1>
+
+            <p>
+                Test your understanding of pointers and linked lists.
+                Complete quizzes to earn XP and unlock future assessments.
+            </p>
+        </div>
+
+        <div class="challenge-xp-badge">
+            🧠
+        </div>
+
+    </div>
+
+    <div class="challenge-track">
+
+        @foreach (var quiz in Model)
+        {
+            <div class="challenge-path-card">
+
+                <div class="challenge-icon">
+                    📝
+                </div>
+
+                <div class="challenge-content">
+
+                    <span class="challenge-type">
+                        Level @quiz.Level?.LevelNumber Quiz
+                    </span>
+
+                    <h2>@quiz.Title</h2>
+
+                    <p>
+                        Pass Mark: @quiz.PassMark%
+                        •
+                        Reward: @quiz.XPReward XP
+                    </p>
+
+                    <div class="challenge-meta">
+                        <span class="status-pill unlocked">
+                            Available
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="challenge-action">
+                    <a class="path-start-btn"
+                       href="/Quizzes/Take/@quiz.QuizID">
+                        Start Quiz
+                    </a>
+                </div>
+
+            </div>
+        }
+
+        <!-- Locked Quiz 2 -->
+
+        <div class="challenge-path-card locked-card">
+
+            <div class="challenge-icon locked-icon">
+                🔒
+            </div>
+
+            <div class="challenge-content">
+
+                <span class="challenge-type">
+                    Future Assessment
+                </span>
+
+                <h2>Linked List Basics Quiz</h2>
+
+                <p>
+                    Complete earlier content to unlock this quiz.
+                </p>
+
+                <div class="challenge-meta">
+                    <span class="status-pill locked">
+                        Locked
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Locked Quiz 3 -->
+
+        <div class="challenge-path-card locked-card">
+
+            <div class="challenge-icon locked-icon">
+                🔒
+            </div>
+
+            <div class="challenge-content">
+
+                <span class="challenge-type">
+                    Future Assessment
+                </span>
+
+                <h2>Pointer Traversal Quiz</h2>
+
+                <p>
+                    Reinforce traversal and pointer movement concepts.
+                </p>
+
+                <div class="challenge-meta">
+                    <span class="status-pill locked">
+                        Locked
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Locked Quiz 4 -->
+
+        <div class="challenge-path-card locked-card">
+
+            <div class="challenge-icon locked-icon">
+                🔒
+            </div>
+
+            <div class="challenge-content">
+
+                <span class="challenge-type">
+                    Future Assessment
+                </span>
+
+                <h2>Linked List Operations Quiz</h2>
+
+                <p>
+                    Test insertion, deletion, and search understanding.
+                </p>
+
+                <div class="challenge-meta">
+                    <span class="status-pill locked">
+                        Locked
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Locked Quiz 5 -->
+
+        <div class="challenge-path-card locked-card">
+
+            <div class="challenge-icon locked-icon">
+                🔒
+            </div>
+
+            <div class="challenge-content">
+
+                <span class="challenge-type">
+                    Final Assessment
+                </span>
+
+                <h2>Data Structures Master Quiz</h2>
+
+                <p>
+                    Comprehensive assessment of all learned concepts.
+                </p>
+
+                <div class="challenge-meta">
+                    <span class="status-pill locked">
+                        Locked
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+@if (TempData["Success"] != null)
+{
+    <div id="celebrationModal" class="celebration-overlay active">
+        <div class="celebration-card">
+            <div class="celebration-icon">🎉</div>
+
+            <h2>Great Job!</h2>
+
+            <p>
+                @TempData["Success"]
+            </p>
+
+            <button type="button"
+                    class="btn btn-primary"
+                    onclick="closeCelebrationModal()">
+                Continue Learning
+            </button>
+        </div>
+    </div>
+}
+
+<script>
+    function closeCelebrationModal() {
+        document.getElementById("celebrationModal").classList.remove("active");
+    }
+</script>
+</div>

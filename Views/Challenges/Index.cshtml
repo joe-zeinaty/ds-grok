@@ -1,0 +1,205 @@
+@model List<D_S_Grok.Models.Challenge>
+
+@{
+    ViewData["Title"] = "Challenges";
+}
+
+<section class="challenges-path-page">
+
+    <div class="path-hero">
+        <div>
+            <span class="path-eyebrow">Practice Arena</span>
+            <h1>Data Structure Challenges</h1>
+            <p>
+                Apply what you learned through interactive pointer and linked list challenges.
+                Unlock harder challenges as your data structures journey progresses.
+            </p>
+        </div>
+
+        <div class="path-hero-badge">
+            <span>@Model.Count</span>
+            <small>Available</small>
+        </div>
+    </div>
+
+    <div class="challenge-track">
+
+        @foreach (var challenge in Model)
+        {
+            var challengeUrl = "";
+
+            if (challenge.ChallengeType == "ListTraversal")
+            {
+                challengeUrl = "/Challenges/LinkedListTraversal";
+            }
+            else if (challenge.ChallengeType == "ListOperations")
+            {
+                challengeUrl = "/Challenges/LinkedListOperations";
+            }
+
+            <div class="challenge-path-card">
+
+                <div class="challenge-icon">
+                    @if (challenge.ChallengeType == "ListTraversal")
+                    {
+                        <span>↳</span>
+                    }
+                    else if (challenge.ChallengeType == "ListOperations")
+                    {
+                        <span>⚙</span>
+                    }
+                    else
+                    {
+                        <span>◆</span>
+                    }
+                </div>
+
+                <div class="challenge-content">
+                    <span class="challenge-type">@challenge.ChallengeType</span>
+
+                    <h2>@challenge.Title</h2>
+
+                    <p>@challenge.Description</p>
+
+                    <div class="challenge-meta">
+                        <span class="xp-pill">+@challenge.XPReward XP</span>
+                        <span class="status-pill unlocked">Unlocked</span>
+                    </div>
+                </div>
+
+                <div class="challenge-action">
+                    @if (!string.IsNullOrEmpty(challengeUrl))
+                    {
+                        <a class="path-start-btn" href="@challengeUrl">
+                            Start Challenge
+                        </a>
+                    }
+                </div>
+
+            </div>
+        }
+
+        <!-- Locked Challenge 3 -->
+        <div class="challenge-path-card locked-card">
+
+            <div class="challenge-icon locked-icon">
+                🔒
+            </div>
+
+            <div class="challenge-content">
+                <span class="challenge-type">Future Challenge</span>
+
+                <h2>Reverse a Linked List</h2>
+
+                <p>
+                    Practice reversing node connections by updating each next pointer step by step.
+                </p>
+
+                <div class="challenge-meta">
+                    <span class="xp-pill locked-xp">+75 XP</span>
+                    <span class="status-pill locked">Locked</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Locked Challenge 4 -->
+        <div class="challenge-path-card locked-card">
+
+            <div class="challenge-icon locked-icon">
+                🔒
+            </div>
+
+            <div class="challenge-content">
+                <span class="challenge-type">Future Challenge</span>
+
+                <h2>Detect a Cycle</h2>
+
+                <p>
+                    Use slow and fast pointers to identify whether a linked list contains a loop.
+                </p>
+
+                <div class="challenge-meta">
+                    <span class="xp-pill locked-xp">+90 XP</span>
+                    <span class="status-pill locked">Locked</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Locked Challenge 5 -->
+        <div class="challenge-path-card locked-card">
+
+            <div class="challenge-icon locked-icon">
+                🔒
+            </div>
+
+            <div class="challenge-content">
+                <span class="challenge-type">Future Challenge</span>
+
+                <h2>Merge Two Sorted Lists</h2>
+
+                <p>
+                    Compare nodes from two lists and build one sorted linked list using pointer updates.
+                </p>
+
+                <div class="challenge-meta">
+                    <span class="xp-pill locked-xp">+100 XP</span>
+                    <span class="status-pill locked">Locked</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Locked Challenge 6 -->
+        <div class="challenge-path-card locked-card">
+
+            <div class="challenge-icon locked-icon">
+                🔒
+            </div>
+
+            <div class="challenge-content">
+                <span class="challenge-type">Final Challenge</span>
+
+                <h2>Linked List Mastery</h2>
+
+                <p>
+                    Complete a combined challenge involving traversal, insertion, deletion, and pointer reasoning.
+                </p>
+
+                <div class="challenge-meta">
+                    <span class="xp-pill locked-xp">+150 XP</span>
+                    <span class="status-pill locked">Locked</span>
+                </div>
+            </div>
+
+        </div>
+@if (TempData["Success"] != null)
+{
+    <div id="celebrationModal" class="celebration-overlay active">
+        <div class="celebration-card">
+            <div class="celebration-icon">🎉</div>
+
+            <h2>Great Job!</h2>
+
+            <p>
+                @TempData["Success"]
+            </p>
+
+            <button type="button"
+                    class="btn btn-primary"
+                    onclick="closeCelebrationModal()">
+                Continue Learning
+            </button>
+        </div>
+    </div>
+}
+
+<script>
+    function closeCelebrationModal() {
+        document.getElementById("celebrationModal").classList.remove("active");
+    }
+</script>
+    </div>
+
+</section>
