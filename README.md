@@ -1,10 +1,23 @@
 # D.S-Grok 🎮
 
-### A Game-Based Learning Web Application for Data Structures Education
+### Game-Based Learning for Data Structures
 
-D.S-Grok is a web-based educational application developed as my Computer Science senior project.
+D.S-Grok is a web-based educational application developed as my Bachelor of Science in Computer Science senior project.
 
-The goal of the project is to help university students understand fundamental data structure concepts through interactive lessons, visualisations, quizzes, challenges, and gamification.
+It was designed to help university students understand data structure concepts through **interactive visualisations, lessons, quizzes, challenges, and gamification**.
+
+![.NET](https://img.shields.io/badge/.NET-8.0-512BD4)
+![C#](https://img.shields.io/badge/C%23-ASP.NET_Core-512BD4)
+![EF Core](https://img.shields.io/badge/Entity_Framework-Core-512BD4)
+![MySQL](https://img.shields.io/badge/Database-MySQL-4479A1)
+![JavaScript](https://img.shields.io/badge/Frontend-JavaScript-F7DF1E)
+![MVC](https://img.shields.io/badge/Architecture-MVC-blue)
+
+---
+
+## 📸 Preview
+
+![D.S-Grok Dashboard](docs/screenshots/dashboard-page.png)
 
 ---
 
