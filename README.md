@@ -162,9 +162,32 @@ Human-computer interaction
 Game-based learning
 Educational technology
 Data structure visualisation
-📸 Screenshots
 
-Application screenshots will be added here.
+## 📸 Screenshots
+
+### Dashboard
+
+![D.S-Grok Dashboard](docs/screenshots/dashboard-page.png)
+
+### Learning Path
+
+![D.S-Grok Learning Path](docs/screenshots/learning-path-page.png)
+
+### Interactive Lesson
+
+![D.S-Grok Lesson Visualizer](docs/screenshots/lesson-arena-page.png)
+
+### Challenge
+
+![D.S-Grok Challenge](docs/screenshots/challenge-arena.png)
+
+### Quiz
+
+![D.S-Grok Quiz](docs/screenshots/quiz-interface.png)
+
+### Leaderboard
+
+![D.S-Grok Leaderboard](docs/screenshots/leaderboard-page.png)
 
 📌 Project Status
 
